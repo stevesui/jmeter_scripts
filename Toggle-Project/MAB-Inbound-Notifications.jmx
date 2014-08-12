@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.6" jmeter="2.11 r1554548">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="notification_vip" elementType="Argument">
+            <stringProp name="Argument.name">notification_vip</stringProp>
+            <stringProp name="Argument.value">198.225.137.242</stringProp>
+            <stringProp name="Argument.desc">load balancer address for mab notifications</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="security_passcode" elementType="Argument">
+            <stringProp name="Argument.name">security_passcode</stringProp>
+            <stringProp name="Argument.value">lindbergh</stringProp>
+            <stringProp name="Argument.desc">application passcode included in payload</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="counter" elementType="Argument">
+            <stringProp name="Argument.name">counter</stringProp>
+            <stringProp name="Argument.value">0</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="mailbox_number_1" elementType="Argument">
+            <stringProp name="Argument.name">mailbox_number_1</stringProp>
+            <stringProp name="Argument.value">2138441182</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="mailbox_number_2" elementType="Argument">
+            <stringProp name="Argument.name">mailbox_number_2</stringProp>
+            <stringProp name="Argument.value">2138441183</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="mailbox_number_3" elementType="Argument">
+            <stringProp name="Argument.name">mailbox_number_3</stringProp>
+            <stringProp name="Argument.value">2138441184</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="mailbox_number_4" elementType="Argument">
+            <stringProp name="Argument.name">mailbox_number_4</stringProp>
+            <stringProp name="Argument.value">2138441185</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="mailbox_number_5" elementType="Argument">
+            <stringProp name="Argument.name">mailbox_number_5</stringProp>
+            <stringProp name="Argument.value">2138441186</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="security_application_id" elementType="Argument">
+            <stringProp name="Argument.name">security_application_id</stringProp>
+            <stringProp name="Argument.value">WEBVVM</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="SOAP Notification Users" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1401986368000</longProp>
+        <longProp name="ThreadGroup.end_time">1401986368000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/xml</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="false">
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">var KEY_COUNTER = &quot;counter&quot;;
+var KEY_MAILBOX_NUMBER = &quot;mailbox_number&quot;;
+var KEY_PASSCODE = &quot;passcode&quot;;
+var NUMBER_1 = &quot;2138441182&quot;;
+var NUMBER_2 = &quot;2138441184&quot;;
+var mboxNumber = vars.get(KEY_MAILBOX_NUMBER_1);
+var passcode = vars.get(KEY_PASSCODE);
+var counter = parseInt(vars.get(KEY_COUNTER));
+if (mboxNumber == NUMBER_1) {
+	vars.put(KEY_MAILBOX_NUMBER, NUMBER_2);
+} else {
+	vars.put(KEY_MAILBOX_NUMBER, NUMBER_1);
+}
+//vars.put(KEY_PASSCODE, counter + &quot;_lindbergh&quot;);
+vars.put(KEY_COUNTER, counter + 1);
+</stringProp>
+          <stringProp name="scriptLanguage">javascript</stringProp>
+        </JSR223PreProcessor>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Mailbox #1 HTTP Notify Request " enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#xd;
+&lt;SOAP-ENV:Envelope xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:SOAP-ENC=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:ws=&quot;http://tempuri.org/ws.xsd&quot; xmlns:wsc=&quot;http://mabservice.alcatel-lucent.com/wsc&quot;&gt;&#xd;
+&lt;SOAP-ENV:Body SOAP-ENV:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;&#xd;
+&lt;wsc:notify&gt;&#xd;
+ &lt;wsc:notificationRequest&gt;&#xd;
+  &lt;wsc:notificationPayload&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;event&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;newVMSmessage&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;folder&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;VMS:INBOX&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;mboxNumber&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;${mailbox_number_1}&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;uivalidy&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;0&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;uid&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;1&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;newMsgCount&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;1&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;webServicesVip&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;dvm.npc.mobilephone.net:7627&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;msgType&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;Voicemail&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;mboxToken&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;4:${mailbox_number_1}:A:willowsap2:ms02:TGL:60453&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;usrMsg&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;Voice message from Voicemail&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+  &lt;/wsc:notificationPayload&gt;&#xd;
+  &lt;wsc:clientSecuritySegment&gt;&#xd;
+   &lt;applicationID&gt;${security_application_id}&lt;/applicationID&gt;&#xd;
+   &lt;applicationPasscode&gt;${security_passcode}&lt;/applicationPasscode&gt;&#xd;
+  &lt;/wsc:clientSecuritySegment&gt;&#xd;
+  &lt;wsc:clientDebugSegment&gt;&#xd;
+   &lt;MABID&gt;ACDS2&lt;/MABID&gt;&#xd;
+   &lt;protocolVersion&gt;HTTP11&lt;/protocolVersion&gt;&#xd;
+   &lt;MABVersion&gt;9.0.0-31&lt;/MABVersion&gt;&#xd;
+  &lt;/wsc:clientDebugSegment&gt;&#xd;
+ &lt;/wsc:notificationRequest&gt;&#xd;
+&lt;/wsc:notify&gt;&#xd;
+&lt;/SOAP-ENV:Body&gt;&#xd;
+&lt;/SOAP-ENV:Envelope&gt;</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${notification_vip}</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/inbound_notifications/alu_mab</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Mailbox #2 HTTP Notify Request " enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#xd;
+&lt;SOAP-ENV:Envelope xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:SOAP-ENC=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:ws=&quot;http://tempuri.org/ws.xsd&quot; xmlns:wsc=&quot;http://mabservice.alcatel-lucent.com/wsc&quot;&gt;&#xd;
+&lt;SOAP-ENV:Body SOAP-ENV:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;&#xd;
+&lt;wsc:notify&gt;&#xd;
+ &lt;wsc:notificationRequest&gt;&#xd;
+  &lt;wsc:notificationPayload&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;event&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;newVMSmessage&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;folder&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;VMS:INBOX&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;mboxNumber&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;${mailbox_number_2}&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;uivalidy&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;0&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;uid&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;1&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;newMsgCount&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;1&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;webServicesVip&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;dvm.npc.mobilephone.net:7627&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;msgType&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;Voicemail&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;mboxToken&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;4:${mailbox_number_2}:A:willowsap2:ms02:TGL:60453&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;usrMsg&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;Voice message from Voicemail&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+  &lt;/wsc:notificationPayload&gt;&#xd;
+  &lt;wsc:clientSecuritySegment&gt;&#xd;
+   &lt;applicationID&gt;${security_application_id}&lt;/applicationID&gt;&#xd;
+   &lt;applicationPasscode&gt;${security_passcode}&lt;/applicationPasscode&gt;&#xd;
+  &lt;/wsc:clientSecuritySegment&gt;&#xd;
+  &lt;wsc:clientDebugSegment&gt;&#xd;
+   &lt;MABID&gt;ACDS2&lt;/MABID&gt;&#xd;
+   &lt;protocolVersion&gt;HTTP11&lt;/protocolVersion&gt;&#xd;
+   &lt;MABVersion&gt;9.0.0-31&lt;/MABVersion&gt;&#xd;
+  &lt;/wsc:clientDebugSegment&gt;&#xd;
+ &lt;/wsc:notificationRequest&gt;&#xd;
+&lt;/wsc:notify&gt;&#xd;
+&lt;/SOAP-ENV:Body&gt;&#xd;
+&lt;/SOAP-ENV:Envelope&gt;</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${notification_vip}</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/inbound_notifications/alu_mab</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Mailbox #3 HTTP Notify Request " enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#xd;
+&lt;SOAP-ENV:Envelope xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:SOAP-ENC=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:ws=&quot;http://tempuri.org/ws.xsd&quot; xmlns:wsc=&quot;http://mabservice.alcatel-lucent.com/wsc&quot;&gt;&#xd;
+&lt;SOAP-ENV:Body SOAP-ENV:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;&#xd;
+&lt;wsc:notify&gt;&#xd;
+ &lt;wsc:notificationRequest&gt;&#xd;
+  &lt;wsc:notificationPayload&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;event&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;newVMSmessage&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;folder&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;VMS:INBOX&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;mboxNumber&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;${mailbox_number_3}&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;uivalidy&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;0&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;uid&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;1&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;newMsgCount&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;1&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;webServicesVip&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;dvm.npc.mobilephone.net:7627&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;msgType&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;Voicemail&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;mboxToken&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;4:${mailbox_number_3}:A:willowsap2:ms02:TGL:60453&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;usrMsg&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;Voice message from Voicemail&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+  &lt;/wsc:notificationPayload&gt;&#xd;
+  &lt;wsc:clientSecuritySegment&gt;&#xd;
+   &lt;applicationID&gt;${security_application_id}&lt;/applicationID&gt;&#xd;
+   &lt;applicationPasscode&gt;${security_passcode}&lt;/applicationPasscode&gt;&#xd;
+  &lt;/wsc:clientSecuritySegment&gt;&#xd;
+  &lt;wsc:clientDebugSegment&gt;&#xd;
+   &lt;MABID&gt;ACDS2&lt;/MABID&gt;&#xd;
+   &lt;protocolVersion&gt;HTTP11&lt;/protocolVersion&gt;&#xd;
+   &lt;MABVersion&gt;9.0.0-31&lt;/MABVersion&gt;&#xd;
+  &lt;/wsc:clientDebugSegment&gt;&#xd;
+ &lt;/wsc:notificationRequest&gt;&#xd;
+&lt;/wsc:notify&gt;&#xd;
+&lt;/SOAP-ENV:Body&gt;&#xd;
+&lt;/SOAP-ENV:Envelope&gt;</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${notification_vip}</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/inbound_notifications/alu_mab</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Mailbox #4 HTTP Notify Request " enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#xd;
+&lt;SOAP-ENV:Envelope xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:SOAP-ENC=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:ws=&quot;http://tempuri.org/ws.xsd&quot; xmlns:wsc=&quot;http://mabservice.alcatel-lucent.com/wsc&quot;&gt;&#xd;
+&lt;SOAP-ENV:Body SOAP-ENV:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;&#xd;
+&lt;wsc:notify&gt;&#xd;
+ &lt;wsc:notificationRequest&gt;&#xd;
+  &lt;wsc:notificationPayload&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;event&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;newVMSmessage&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;folder&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;VMS:INBOX&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;mboxNumber&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;${mailbox_number_4}&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;uivalidy&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;0&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;uid&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;1&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;newMsgCount&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;1&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;webServicesVip&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;dvm.npc.mobilephone.net:7627&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;msgType&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;Voicemail&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;mboxToken&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;4:${mailbox_number_4}:A:willowsap2:ms02:TGL:60453&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;usrMsg&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;Voice message from Voicemail&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+  &lt;/wsc:notificationPayload&gt;&#xd;
+  &lt;wsc:clientSecuritySegment&gt;&#xd;
+   &lt;applicationID&gt;${security_application_id}&lt;/applicationID&gt;&#xd;
+   &lt;applicationPasscode&gt;${security_passcode}&lt;/applicationPasscode&gt;&#xd;
+  &lt;/wsc:clientSecuritySegment&gt;&#xd;
+  &lt;wsc:clientDebugSegment&gt;&#xd;
+   &lt;MABID&gt;ACDS2&lt;/MABID&gt;&#xd;
+   &lt;protocolVersion&gt;HTTP11&lt;/protocolVersion&gt;&#xd;
+   &lt;MABVersion&gt;9.0.0-31&lt;/MABVersion&gt;&#xd;
+  &lt;/wsc:clientDebugSegment&gt;&#xd;
+ &lt;/wsc:notificationRequest&gt;&#xd;
+&lt;/wsc:notify&gt;&#xd;
+&lt;/SOAP-ENV:Body&gt;&#xd;
+&lt;/SOAP-ENV:Envelope&gt;</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${notification_vip}</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/inbound_notifications/alu_mab</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Mailbox #5 HTTP Notify Request " enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#xd;
+&lt;SOAP-ENV:Envelope xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:SOAP-ENC=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:ws=&quot;http://tempuri.org/ws.xsd&quot; xmlns:wsc=&quot;http://mabservice.alcatel-lucent.com/wsc&quot;&gt;&#xd;
+&lt;SOAP-ENV:Body SOAP-ENV:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;&#xd;
+&lt;wsc:notify&gt;&#xd;
+ &lt;wsc:notificationRequest&gt;&#xd;
+  &lt;wsc:notificationPayload&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;event&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;newVMSmessage&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;folder&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;VMS:INBOX&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;mboxNumber&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;${mailbox_number_5}&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;uivalidy&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;0&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;uid&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;1&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;newMsgCount&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;1&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;webServicesVip&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;dvm.npc.mobilephone.net:7627&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;msgType&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;Voicemail&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;mboxToken&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;4:${mailbox_number_5}:A:willowsap2:ms02:TGL:60453&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+   &lt;wsc:notificationEntry&gt;&#xd;
+    &lt;attributeName&gt;usrMsg&lt;/attributeName&gt;&#xd;
+    &lt;value&gt;Voice message from Voicemail&lt;/value&gt;&#xd;
+   &lt;/wsc:notificationEntry&gt;&#xd;
+  &lt;/wsc:notificationPayload&gt;&#xd;
+  &lt;wsc:clientSecuritySegment&gt;&#xd;
+   &lt;applicationID&gt;${security_application_id}&lt;/applicationID&gt;&#xd;
+   &lt;applicationPasscode&gt;${security_passcode}&lt;/applicationPasscode&gt;&#xd;
+  &lt;/wsc:clientSecuritySegment&gt;&#xd;
+  &lt;wsc:clientDebugSegment&gt;&#xd;
+   &lt;MABID&gt;ACDS2&lt;/MABID&gt;&#xd;
+   &lt;protocolVersion&gt;HTTP11&lt;/protocolVersion&gt;&#xd;
+   &lt;MABVersion&gt;9.0.0-31&lt;/MABVersion&gt;&#xd;
+  &lt;/wsc:clientDebugSegment&gt;&#xd;
+ &lt;/wsc:notificationRequest&gt;&#xd;
+&lt;/wsc:notify&gt;&#xd;
+&lt;/SOAP-ENV:Body&gt;&#xd;
+&lt;/SOAP-ENV:Envelope&gt;</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${notification_vip}</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/inbound_notifications/alu_mab</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
